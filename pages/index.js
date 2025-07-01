@@ -74,7 +74,7 @@ export default function Home() {
       {(winner || isDraw) && (
         <div className="mt-4 text-center">
           <p className="text-xl font-semibold">
-            {winner ? \`Winner: \${winner}\` : 'Draw!'}
+           {winner ? `Winner: ${winner}` : 'Draw!'}
           </p>
           <button
             onClick={reset}
