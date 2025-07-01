@@ -1,7 +1,7 @@
 // pages/index.js
 import { useState, useEffect } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Button } from '../components/ui/button';
+import { Card, CardContent } from '../components/ui/card';
 
 const lines = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8],
