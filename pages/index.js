@@ -65,7 +65,7 @@ export default function Home() {
           <button
             key={i}
             onClick={() => handleClick(i)}
-          className={`w-20 h-20 text-2xl font-bold border ${winLine.includes(i) ? 'bg-green-300' : 'bg-white'}`}
+            className={`w-20 h-20 text-2xl font-bold border ${winLine.includes(i) ? 'bg-green-300' : 'bg-white'}`}
           >
             {val}
           </button>
