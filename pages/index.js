@@ -1,7 +1,7 @@
 // pages/index.js
 import { useState, useEffect } from 'react';
-import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const lines = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -15,33 +15,26 @@ export default function Home() {
   const [winner, setWinner] = useState(null);
   const [winLine, setWinLine] = useState([]);
   const [isDraw, setIsDraw] = useState(false);
-  const [scores, setScores] = useState({ X: 0, O: 0, Draws: 0 });
+
+  // ✅ Use emoji keys for scores
+  const [scores, setScores] = useState({ '🐰': 0, '🥕': 0, Draws: 0 });
 
   useEffect(() => {
     for (const [a, b, c] of lines) {
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
         setWinner(squares[a]);
         setWinLine([a, b, c]);
-        setScores(prev => ({ ...prev, [squares[a]]: prev[squares[a]] + 1 }));
+
+        // ✅ Correct scoring using emoji
+        setScores(prev => ({
+          ...prev,
+          [squares[a]]: prev[squares[a]] + 1
+        }));
         return;
       }
     }
 
     const empty = squares.includes(null);
-    const xPossible = lines.some(([a, b, c]) => {
-      const line = [squares[a], squares[b], squares[c]];
-      return line.includes(null) && !line.includes('🥕');
-    });
-    const oPossible = lines.some(([a, b, c]) => {
-      const line = [squares[a], squares[b], squares[c]];
-      return line.includes(null) && !line.includes('🐰');
-    });
-
-    if (!winner && empty && !xPossible && !oPossible) {
-      setIsDraw(true);
-      setScores(prev => ({ ...prev, Draws: prev.Draws + 1 }));
-    }
-
     if (!winner && !empty) {
       setIsDraw(true);
       setScores(prev => ({ ...prev, Draws: prev.Draws + 1 }));
@@ -66,7 +59,7 @@ export default function Home() {
 
   const resetAll = () => {
     reset();
-    setScores({ X: 0, O: 0, Draws: 0 });
+    setScores({ '🐰': 0, '🥕': 0, Draws: 0 });
   };
 
   return (
@@ -113,8 +106,9 @@ export default function Home() {
           <Card>
             <CardContent className="text-center p-4">
               <h2 className="text-lg font-bold mb-2">Score Board</h2>
-              <p>🐰 (Rabbit): {scores.X}</p>
-              <p>🥕 (Carrot): {scores.O}</p>
+              {/* ✅ Correct emoji key usage */}
+              <p>🐰 (Rabbit): {scores['🐰']}</p>
+              <p>🥕 (Carrot): {scores['🥕']}</p>
               <p>Draws: {scores.Draws}</p>
             </CardContent>
           </Card>
